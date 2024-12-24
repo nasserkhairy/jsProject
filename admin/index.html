@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="crud">
+      <div class="head">
+        <h2>crud</h2>
+        <p>prouduct management system</p>
+      </div>
+
+      <div class="inputs">
+        <input type="text" id="pro_Name" placeholder="Name" />
+
+        <div class="price">
+          <input
+            onkeyup="getTotal()"
+            type="number"
+            id="price"
+            placeholder="price"
+          />
+
+          <input
+            onkeyup="getTotal()"
+            type="number"
+            id="stock_quntity"
+            placeholder="stock_quntity"
+          />
+        </div>
+        <input type="file" name="image" id="image" />
+        <input
+          onkeyup="getTotal()"
+          type="text"
+          id="description"
+          placeholder="description"
+        />
+        <input type="number" id="count" placeholder="count">
+        <input type="text" id="category" placeholder="category" />
+        <button id="submit">Create</button>
+        <button id="logout">Logout</button>
+      </div>
+
+      <div class="outputs">
+        <div class="searchBlock">
+          <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="search" />
+          <div class="btnSearch">
+            <button  onclick="getSearhMood(this.id)"  id="searchTitle">Search By Title</button>
+            <button onclick=" getSearhMood(this.id)" id="searchCategory">Search By Category</button>
+          </div>
+          <div id="deleteAll">
+
+          </div>
+          <table>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock Quantity</th>
+              <th>Image</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>To Do Action</th>
+            
+            </tr>
+            <tbody id="tbody">
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/isAdmin.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
