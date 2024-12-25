@@ -115,10 +115,10 @@ function updateData(i) {
   pro_Name.value = productsData[i].name.toLowerCase();
   price.value = productsData[i].price;
   stock_quntity.value = productsData[i].stock_quntity;
-  image.value = productsData[i].image;
+  image.value =  image.files[0].name;
   description.value = productsData[i].description;
   category.value = productsData[i].category.toLowerCase();
-  count.value = 1; // القيمة الافتراضية لـ count
+  // count.value = 1; // القيمة الافتراضية لـ count
   submit.innerHTML = "Update";
   mood = "update";
   tmp = i;
