@@ -77,7 +77,11 @@
       let products = JSON.parse(localStorage.getItem("product"));
       for (product of products) {
         content.innerHTML+= `<div class="product-box">
+<<<<<<< HEAD
         <img src="admin/assets/images/${product.image}" alt="" class="product-img">
+=======
+        <img src="E-Commerce ShopingCart [Korsat X Parmaga]/assets/img/product1.jpg" alt="" class="product-img">
+>>>>>>> 6d35faacae7ffda06ea639bf250451a0c08ffed8
         <h2 class="product-title">${product.name}</h2>
         <span class="product-price">${product.price} le</span>
         <i class='bx bx-shopping-bag add-cart'></i>
