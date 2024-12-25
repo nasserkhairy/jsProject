@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول والتسجيل</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        background: #1b0909;
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        color: #fff;
+        background-image: url(assets/img/spiderman1.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      form {
+        align-items: center;
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+      }
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        border-color: #80bdff;
+        outline: none;
+      }
+      button {
+        width: 50%;
+        padding: 25px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-left: 69px;
+      }
+      button:hover {
+        background-color: #0056b3;
+        letter-spacing: 1px;
+        transition: letter-spacing 0.7s;
+      }
+      .toggle-link {
+        text-align: center;
+        margin-top: 10px;
+      }
+      .toggle-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .toggle-link a:hover {
+        text-decoration: underline;
+      }
+      .form-container {
+        display: none;
+      }
+      .active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div id="loginForm" class="form-container active">
+        <h2>تسجيل الدخول</h2>
+        <form onsubmit="return validateLogin()">
+          <label for="loginEmail">البريد الإلكتروني:</label>
+          <input type="email" id="loginEmail" required />
+          <label for="loginPassword">كلمة المرور:</label>
+          <input type="password" id="loginPassword" required />
+          <button type="submit">تسجيل الدخول</button>
+          <div class="toggle-link">
+            ليس لديك حساب؟ <a href="#" onclick="toggleForms()">سجل هنا</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="registerForm" class="form-container">
+        <h2>التسجيل</h2>
+        <form onsubmit="return validateRegister()">
+          <label for="registerEmail">البريد الإلكتروني:</label>
+          <input name="email" type="email" id="registerEmail" value="" required />
+          <label for="registerPassword">كلمة المرور:</label>
+          <input name="password" type="password" id="registerPassword" value="" required />
+          <button id="submit" type="submit">تسجيل</button>
+          <div class="toggle-link">
+            لديك حساب؟ <a href="#" onclick="toggleForms()">تسجيل الدخول هنا</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      let password = document.getElementById("loginPassword");
+      let container = document.getElementById("container");
+      let registerEmail = document.getElementById("registerEmail");
+      let loginBTN=document.getElementById("submit");
+      loginBTN.onclick =function(){
+    console.log(password.value)
+    
+    }
+
+
+      password.onkeypress = function () {
+     
+        container.style.backgroundImage = "url(assets/img/spiderman2.jpg)";
+      };
+      password.onkeyup = function () {
+       
+        container.style.backgroundImage = "url(assets/img/spiderman1.jpg)";
+      };
+      function toggleForms() {
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        loginForm.classList.toggle("active");
+        registerForm.classList.toggle("active");
+      }
+
+      function validateLogin() {
+       let name;
+        console.log(registerEmail.value)
+        return false; // لمنع إعادة تحميل الصفحة
+      }
+
+      function validateRegister() {
+        alert("تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول.");
+        toggleForms(); // الانتقال إلى نموذج تسجيل الدخول
+        return false; // لمنع إعادة تحميل الصفحة
+      }
+    </script>
+  </body>
+</html>

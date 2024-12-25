@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>علم مصر بحركة قطريّة</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #87CEEB, #FFFFFF); /* لون السماء */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .flag-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .flagpole {
+      width: 10px;
+      height: 300px;
+      background: #4b4b4b;
+    }
+
+    .flag {
+      width: 240px;
+      height: 160px;
+      margin-left: 10px;
+      position: relative;
+      background: linear-gradient(to bottom, red 33.33%, white 33.33%, white 66.66%, black 66.66%);
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      transform-origin: center;
+      border-radius: 10px;
+    }
+
+    .flag img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 40%;
+    }
+  </style>
+</head>
+<body>
+  <div class="flag-container">
+    <div class="flagpole"></div>
+    <div class="flag">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Coat_of_arms_of_Egypt.svg" alt="نسر مصر">
+    </div>
+  </div>
+
+  <script>
+    // تحريك العلم باستخدام JavaScript
+    const flag = document.querySelector('.flag');
+
+    let angle = 0;
+    let waveIntensity = 10;
+
+    // دالة لتحريك العلم بشكل قطري
+    function animateFlag() {
+      // تعديل زاوية التدوير وحركة الموجة
+      angle += 0.5;
+      const waveEffect = Math.sin(angle * Math.PI / 180) * waveIntensity;
+
+      // تطبيق الحركة على العلم
+      flag.style.transform = `rotate(${waveEffect}deg) skewX(${waveEffect / 2}deg)`;
+
+      // تكرار الحركة بشكل مستمر
+      requestAnimationFrame(animateFlag);
+    }
+
+    // بدء الحركة عند تحميل الصفحة
+    animateFlag();
+  </script>
+</body>
+</html>
