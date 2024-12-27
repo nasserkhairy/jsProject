@@ -23,27 +23,37 @@ submit.onclick = function () {
     name: pro_Name.value.toLowerCase(),
     price: price.value,
     stock_quntity: stock_quntity.value,
-    image: image.files[0].name,
+    // image: image.files[0].name,
+    image: image.files.length > 0 ? image.files[0].name : mood === "update" ? productsData[tmp].image : "",
+
     description: description.value,
-    count: count.value,
+    // count: count.value,
     category: category.value.toLowerCase(),
   };
 
   // validation
-  if (newPro.name === "" || newPro.price === "" || newPro.stock_quntity === "" || newPro.count <= 0) {
+  const categoryRegex = /^[a-z\s-]{4,20}$/i;
+  const nameRegex =/^[a-z][a-z0-9 -.]{4,}$/i;
+  if (newPro.name === "" || 
+  !nameRegex.test(newPro.name) ||
+  newPro.price === "" || 
+  newPro.stock_quntity === "" || 
+  newPro.category === "" || 
+   newPro.category.length > 20||
+  !categoryRegex.test(newPro.category)) {
     alert("Please fill all fields correctly.");
     return;
   }
 
   if (mood === "create") {
-    if (newPro.count > 1) {
-      for (let i = 0; i < newPro.count; i++) {
-        productsData.push(newPro);
-      }
-    } else {
+    // if (newPro.count > 1) {
+    //   for (let i = 0; i < newPro.count; i++) {
+    //     productsData.push(newPro);
+    //   }
+    // } else {
       productsData.push(newPro);
     }
-  } else {
+   else {
     productsData[tmp] = newPro;
     mood = "create";
     submit.innerHTML = "Create";
@@ -63,7 +73,7 @@ function clearData() {
   image.value = "";
   description.value = "";
   category.value = "";
-  count.value = ""; 
+  // count.value = ""; 
 }
 
 function showData() {
@@ -112,10 +122,11 @@ function deleteData(i) {
 }
 
 function updateData(i) {
+  console.log(productsData[i]);
   pro_Name.value = productsData[i].name.toLowerCase();
   price.value = productsData[i].price;
   stock_quntity.value = productsData[i].stock_quntity;
-  image.value =  image.files[0].name;
+  // image.value =  productsData[i].image;
   description.value = productsData[i].description;
   category.value = productsData[i].category.toLowerCase();
   // count.value = 1; // القيمة الافتراضية لـ count
