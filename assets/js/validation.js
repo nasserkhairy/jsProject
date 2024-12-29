@@ -13,7 +13,7 @@ function checkEmail(value){
     let emailPattern=/^[A-za-z0-9]+@[A-za-z0-9]+\.[a-zA-Z]{2,}$/; 
     return emailPattern.test(value);
 }
-function checkEmailExist(users , email) {
+function checkEmailExist(users , email) { // [{},{}]
     if (users.find(user => user.email === email)) {
         return true;
     }

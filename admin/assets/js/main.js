@@ -8,59 +8,77 @@ let submit = document.getElementById("submit");
 let count = document.getElementById("count");
 let mood = "create";
 let tmp;
-let productsData;
-const logoutBtn=document.querySelector("#logout");
+const errorsUL= document.getElementById("errors");
+let errors = [];
+let productsData = JSON.parse(localStorage.getItem("product")) || [];
+let categoriesData = JSON.parse(localStorage.getItem("categories")) || [];
 
-if (localStorage.getItem("product") != null) {
-  productsData = JSON.parse(localStorage.getItem("product"));
-} else {
-  productsData = [];
+for (let i = 0; i < categoriesData.length; i++) {
+  category.innerHTML += `<option value="${categoriesData[i].name}">${categoriesData[i].name}</option`;
 }
 
 submit.onclick = function () {
-  
+  errors = [];
+  document.querySelector(".alert-danger").style.display="none";
+  errorsUL.innerHTML="";
+  let imageName;
+  if (image.files.length > 0) {
+    imageName = image.files[0].name;
+    imgArr=imageName.split(".");
+    let ext = imgArr[imgArr.length - 1];
+    ext = ext.toLowerCase();
+    if(!['png','jpg','jpeg'].includes(ext)){
+      errors.push("not allowed extension.");
+    }
+  } else if (mood === "update") {
+    imageName = productsData[tmp].image;
+  } else {
+    imageName = "";
+  }
+
   let newPro = {
     name: pro_Name.value.toLowerCase(),
     price: price.value,
     stock_quntity: stock_quntity.value,
-    // image: image.files[0].name,
-    image: image.files.length > 0 ? image.files[0].name : mood === "update" ? productsData[tmp].image : "",
-
+    image: imageName,
     description: description.value,
-    // count: count.value,
     category: category.value.toLowerCase(),
   };
 
   // validation
-  const categoryRegex = /^[a-z\s-]{4,20}$/i;
   const nameRegex =/^[a-z][a-z0-9 -.]{4,}$/i;
-  if (newPro.name === "" || 
-  !nameRegex.test(newPro.name) ||
-  newPro.price === "" || 
-  newPro.stock_quntity === "" || 
-  newPro.category === "" || 
-   newPro.category.length > 20||
-  !categoryRegex.test(newPro.category)) {
-    alert("Please fill all fields correctly.");
+  if(newPro.name === ""){
+    errors.push("product name is required.");
+  }else if(!nameRegex.test(newPro.name)){
+    errors.push("invalid product name.");
+  }
+  if(newPro.price === ""){
+    errors.push("price is required.");
+  }
+  if(newPro.stock_quntity === ""){
+    errors.push("stock quantity is required.");
+  }
+  if(newPro.category === ""){
+    errors.push("category is required.");
+  }
+  if(errors.length > 0){
+    for (let i = 0; i < errors.length; i++) {
+      errorsUL.innerHTML += `<li>${errors[i]}</li>`;
+    }
+    document.querySelector(".alert-danger").style.display="block";
     return;
   }
 
   if (mood === "create") {
-    // if (newPro.count > 1) {
-    //   for (let i = 0; i < newPro.count; i++) {
-    //     productsData.push(newPro);
-    //   }
-    // } else {
-      productsData.push(newPro);
-    }
-   else {
+    productsData.push(newPro);
+    document.querySelector(".alert-success").style.display="block";
+  }else {
     productsData[tmp] = newPro;
     mood = "create";
     submit.innerHTML = "Create";
-    count.style.display = "block";
+    clearData();
   }
 
-  // تأكد من استخدام نفس المفتاح
   localStorage.setItem("product", JSON.stringify(productsData));
   clearData();
   showData();
@@ -73,7 +91,6 @@ function clearData() {
   image.value = "";
   description.value = "";
   category.value = "";
-  // count.value = ""; 
 }
 
 function showData() {
@@ -126,10 +143,8 @@ function updateData(i) {
   pro_Name.value = productsData[i].name.toLowerCase();
   price.value = productsData[i].price;
   stock_quntity.value = productsData[i].stock_quntity;
-  // image.value =  productsData[i].image;
   description.value = productsData[i].description;
   category.value = productsData[i].category.toLowerCase();
-  // count.value = 1; // القيمة الافتراضية لـ count
   submit.innerHTML = "Update";
   mood = "update";
   tmp = i;
@@ -201,11 +216,4 @@ function searchData(value) {
     }
   }
   document.getElementById("tbody").innerHTML = table;
-}
-if(logoutBtn){
-  logoutBtn.addEventListener("click", function(){
-      sessionStorage.removeItem("userEmail");
-      sessionStorage.removeItem("isAdmin");
-      location.assign("../login.html");
-  })
 }

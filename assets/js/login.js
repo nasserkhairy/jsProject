@@ -1,7 +1,7 @@
 onload=function(){
     const regForm=document.forms['RegForm'];
-    const password=document.forms['RegForm']['password'];
-    const email=document.forms['RegForm']['email'];
+    const password=regForm['password'];
+    const email=regForm['email'];
     let users = JSON.parse(localStorage.getItem("users")) || [];
     let user;
     let userEmail = sessionStorage.getItem('userEmail');
@@ -10,7 +10,7 @@ onload=function(){
         location.assign("user.html");
     }
 
-    function checkUser() {
+    function checkUser() { // find => return user or false
         return (users.find(user => user.email === email.value && user.password === password.value));
     }
 

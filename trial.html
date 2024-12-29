@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayPal Payment Example</title>
+  </head>
+  <body>
+    <h2>PayPal Payment</h2>
+
+    <!-- زر PayPal سيتم إضافته هنا -->
+    <div id="paypal-button-container"></div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AdXbptu6b4gKXFYkARpxstpyLdnIWF-kRzk9mjDziKPSArUqft85TdXr41ODtHf9qmeasuB1rJRrA9K_&currency=USD"></script>
+
+    <script>
+      let orderStatus = localStorage.getItem("orderStatus")
+        ? JSON.parse(localStorage.getItem("orderStatus"))
+        : [];
+
+      let total = 0;
+      orderStatus.forEach((product) => {
+        if (product.status === "Confirmed") {
+          let price = parseFloat(product.price.replace("EGP", ""));
+          total += price;
+        }
+      });
+      total = total.toFixed(2);
+      paypal
+        .Buttons({
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: total, // المبلغ الذي تود دفعه
+                  },
+                },
+              ],
+            });
+          },
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              alert("تم الدفع بنجاح! مرحبًا " + details.payer.name.given_name);
+              // يمكنك هنا إضافة أكواد لحفظ تفاصيل الدفع في قاعدة البيانات
+            });
+          },
+          onError: function (err) {
+            console.error(err);
+          },
+        })
+        .render("#paypal-button-container"); // عرض الزر في المكان المحدد
+    </script>
+  </body>
+</html>

@@ -1,24 +1,14 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>User Page</h1>
-    <button id="logout">Log out</button>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/isLogin.js"></script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ECommerce-ShoppingCart | Korsat X Parmaga</title>
+    <title>ECommerce | NSM</title>
+
+    <!-- bootstrap links  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
     <!-- box icons  -->
     <link
@@ -28,18 +18,24 @@
     <!-- styles  -->
     <link
       rel="stylesheet"
-      href="E-Commerce ShopingCart [Korsat X Parmaga]/assets/css/style.css"
+      href="assets/css/style.css"
     />
   </head>
 
   <body>
     <!-- HEADER  -->
-    <header>
+    <header id="top">
       <!-- NAV  -->
       <div class="nav container">
-        <a href="#" class="logo"><span>E</span>Commerce</a>
-        <!-- CART ICON  -->
+        <a href="#" class="logo "><span class="text-primary fs-5">NSM</span></a>
+        <!--  ICONS  -->
+        <a href="user.html"  ><i class='bx bx-home text-dark'></i></a>
         <i class="bx bx-shopping-bag" id="cart-icon"></i>
+        <i class='bx bx-heart'id="wish-icon"></i>
+        <i id="user-icon"></i>
+        <!-- class='bx bx-user' -->
+
+        <a href="login.html" id="sign-link">Sign in</a>
 
         <!-- CART  -->
         <div class="cart">
@@ -54,13 +50,72 @@
             <div class="total-price">$0</div>
           </div>
           <!-- BUY BUTTON  -->
-          <button type="button" class="btn-buy">Buy Now</button>
+          <button type="button" class="btn-buy btn btn-primary">Buy Now</button>
           <!-- CART CLOSE  -->
           <i class="bx bx-x" id="cart-close"></i>
+          <a href="ordersUser.html" class="btn btn-primary">Show Orders</a>
+        </div>
+        <!-- WISH  -->
+
+        <div class="cart wish" id="wish-cart">
+          <h2 class="cart-title  wish-content">Your Wish</h2>
+          
+          <!-- BUY BUTTON -->
+          <button type="button" class="btn-cart btn btn-primary" id="add-to-cart">ADD TO CART</button>
+          <!-- CART CLOSE -->
+          <i class="bx bx-x" id="wish-close"></i>
+      </div>
+        <!-- USER  -->
+        <div class="cart" id="user-cart">
+          <h1>Profile</h1>
+          <i class="bx bx-x" id="user-close"></i>
+          <img src="assets/img/user-286.png" alt="user_img">
+          <a href="#"class="btn btn-primary" id="logout">Log out</a>
+        </div>
+
+        <!-- alert -->
+          <div id="alert-box">
+            <!-- <i class="bx bx-x" id="closeAlert"></i> -->
+          </div>
+          
         </div>
       </div>
     </header>
 
+    <!-- slider SECTION  -->
+  <img src="assets/img/interface/1.jpg" alt="">
+    <!-- MODAL SECTION -->
+      
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+        <!--  FILTERATION  SECTION  -->
+    <section class="filtration container ">
+
+      <label for="categoryfiltr">Choose a Category</label>
+      <input type="text" list="categories" id="categoryfiltr" placeholder="Select category">
+      <datalist id="categories"> 
+      </datalist>
+      <section  class="shop container ">
+      <div class="filter-container shop-content ">
+        <img src="assets/img/interface/aaa.jpg" alt="" style="width: 50%;">
+      </div>
+    </section>
+
+  </section>
     <!-- SHOP SECTION  -->
     <section class="shop container">
       <h2 class="section-title">Shop Products</h2>
@@ -70,6 +125,89 @@
         <!-- BOX 1 -->
       </div>
     </section>
+        <!-- PAGINATION SECTION -->
+        <div aria-label="...">
+          <ul class="pagination  justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link disabled">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#cont">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </div>
+        <!-- paner -->
+        <section>
+          <img src="assets/img/interface/down.jpg" alt="">
+
+        </section>
+    
+        <!-- FOOTER SECTION  -->
+        <footer class="footer bg-light pt-5">
+  <div class="container">
+    <div class="row">
+      <!-- Contact Us Section -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-primary mb-3">Contact Us</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-envelope-fill me-2"></i>Email: support@example.com</li>
+          <li><i class="bi bi-telephone-fill me-2"></i>Phone: +123 456 789</li>
+          <li><i class="bi bi-geo-alt-fill me-2"></i>Address: 123 Business Road, City, Country</li>
+        </ul>
+      </div>
+
+      <!-- Payment Methods Section -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-primary mb-3">Payment Methods</h5>
+        <ul class="list-inline">
+          <!--Editing by samira at 12/28/2024 -->
+          <img src="PayPal.png" alt="paypal-img" class="card-img-top">
+        </ul>
+      </div>
+
+      <!-- Quick Links Section -->
+       <!-- delete div samira  -->
+    
+
+      <div class="text-primary col-md-4">
+        <h5 class="mb-3">Feedback</h5>
+        <form id="feedbackForm" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <textarea 
+                    class="form-control" 
+                    id="feedbackMessage" 
+                    rows="4" 
+                    placeholder="Write your feedback here..." 
+                    required></textarea>
+                <div class="invalid-feedback">
+                    Please write your feedback.
+                </div>
+            </div>
+            <button 
+                type="submit" 
+                class="btn btn-primary">
+                <i class='bx bx-send'></i> Send
+            </button>
+        </form>
+    </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom bg-primary text-white text-center py-3 mt-4">
+    <a href="#top" class="text-primary text-decoration-none fw-bold fs-1 bg-light border rounded position-fixed"  style="bottom: 20px; right: 30px;"><i class='bx bxs-chevrons-up'></i></a>
+    <p class="mb-0 mt-2">&copy; 2024 Ecommerce. All Rights Reserved.</p>
+  </div>
+</footer>
+
+      
+
+
 
     <!-- link js  -->
     <script>
@@ -77,19 +215,21 @@
       let products = JSON.parse(localStorage.getItem("product"));
       for (product of products) {
         content.innerHTML+= `<div class="product-box">
-<<<<<<< HEAD
         <img src="admin/assets/images/${product.image}" alt="" class="product-img">
-=======
-        <img src="E-Commerce ShopingCart [Korsat X Parmaga]/assets/img/product1.jpg" alt="" class="product-img">
->>>>>>> 6d35faacae7ffda06ea639bf250451a0c08ffed8
         <h2 class="product-title">${product.name}</h2>
         <span class="product-price">${product.price} le</span>
+        <span class="product-description">${product.description}</span>
+        <span class="product-category">${product.category}</span>
         <i class='bx bx-shopping-bag add-cart'></i>
+        <i class='bx bx-heart add-wish'></i>
     </div>`;
       }
-    
     </script>
-    <script src="E-Commerce ShopingCart [Korsat X Parmaga]/assets/js/main.js"></script>
+    <script src="assets/js/isLogin.js"></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/wishScript.js"></script>
+    <script src="assets/js/productDetails.js"></script>
+    <script src="assets/js/feedback.js"></script>
     <script src="admin/assets/js/main.js"></script>
   </body>
 </html>

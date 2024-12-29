@@ -1,10 +1,10 @@
 onload=function(){
     const regForm=document.forms['RegForm'];
-    const username=document.forms['RegForm']['username'];
-    const password=document.forms['RegForm']['password'];
-    const email=document.forms['RegForm']['email'];
-    const confPass=document.forms['RegForm']['conf-password'];
-    const phone=document.forms['RegForm']['phone'];
+    const username=regForm['username'];
+    const password=regForm['password'];
+    const email=regForm['email'];
+    const confPass=regForm['conf-password'];
+    const phone=regForm['phone'];
     let users = JSON.parse(localStorage.getItem("users")) || [];
     
     function addUser() {
